@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -23,18 +23,21 @@ h1 {
   flex-wrap: wrap;
   gap: 10px;
   max-width: 100%;
+  align-items: stretch;
 }
 
 .row .col {
   width: calc((100% - 30px) / 4);
+  padding: 10px 0;
 }
 
 .card {
-  border: 1px solid red;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  height: 100%;
+  position: relative;
 }
 
 .card .title {
@@ -50,6 +53,7 @@ h1 {
   gap: 10px;
   width: 100%;
   background-color: lightpink;
+  height: 150px;
 }
 .detaills .col-details {
   width: calc((100% - 10px) / 2);
@@ -60,14 +64,32 @@ h1 {
   display: block;
 }
 
-.button {
-  text-align: center;
+.detaills .text ul {
+  padding: 6px 10px;
+  margin-left: 20px;
 }
 
 .btn {
   padding: 4px 10px;
   border: none;
-  background-color: aqua;
-  border-radius: 10px;
+  background-color: transparent;
   cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* .hidden {
+  display: none;
+} */
+
+.btn:hover {
+  transform: scale(1.1);
+  background-color: lightgray;
+  border-radius: 100%;
+  font-weight: 700;
+}
+
+p {
+  padding: 8px 10px;
 }
