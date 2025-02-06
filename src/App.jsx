@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import BlogCard from "./components/blogCard";
+import FormData from "./components/FormData";
 
 export default function App() {
   const [blogsList, setBlogsList] = useState([]);
@@ -31,7 +33,7 @@ export default function App() {
       });
   };
 
-  const handleSumbit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const tagsArray = productFormData.tags
@@ -51,39 +53,23 @@ export default function App() {
   };
 
   useEffect(addProducts, []);
+  console.log(FormData);
 
   return (
     <>
       <div className="container">
         <h1 className="title-principale">Lista blogs</h1>
-
-        <div className="button"></div>
         <div className="row">
           {blogsList.map((elm) => {
             return (
               <div className="col" key={elm.id}>
-                <div className="card">
-                  <button
-                    className="btn"
-                    onClick={() => handleDeleteList(elm.id)}
-                  >
-                    x
-                  </button>
-                  <h3 className="title">{elm.titolo}</h3>
-                  <div className="detaills">
-                    <div className="text col-details">
-                      <ul>
-                        {elm.tags.map((tag, index) => {
-                          return <li key={index}>{tag}</li>;
-                        })}
-                      </ul>
-                    </div>
-                    <div className="image col-details">
-                      <img src={elm.immagine} alt={elm.titolo} />
-                    </div>
-                  </div>
-                  <p>{elm.contenuto}</p>
-                </div>
+                <BlogCard
+                  tags={elm.tags}
+                  immagine={elm.immagine}
+                  titolo={elm.titolo}
+                  contenuto={elm.contenuto}
+                  onClick={() => handleDeleteList(elm.id)}
+                />
               </div>
             );
           })}
@@ -92,51 +78,11 @@ export default function App() {
         <div className="form-data">
           <hr />
           <h1>Aggiungi prodotto</h1>
-          <form onSubmit={handleSumbit}>
-            <input
-              type="text"
-              value={productFormData.titolo}
-              placeholder="inserisci il nome"
-              onChange={(e) =>
-                setProductFormData({
-                  ...productFormData,
-                  titolo: e.target.value,
-                })
-              }
-            />
-            <input
-              type="text"
-              value={productFormData.contenuto}
-              placeholder="inserisci il contenuto"
-              onChange={(e) =>
-                setProductFormData({
-                  ...productFormData,
-                  contenuto: e.target.value,
-                })
-              }
-            />
-            <input
-              type="text"
-              value={productFormData.tags}
-              placeholder="inserisci dei tag"
-              onChange={(e) =>
-                setProductFormData({ ...productFormData, tags: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              value={productFormData.immagine}
-              placeholder="inserisci l'url"
-              alt=""
-              onChange={(e) =>
-                setProductFormData({
-                  ...productFormData,
-                  immagine: e.target.value,
-                })
-              }
-            />
-            <button type="submit">Invia</button>
-          </form>
+          <FormData
+            productFormData={productFormData}
+            setProductFormData={setProductFormData}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </>
