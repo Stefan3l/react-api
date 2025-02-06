@@ -37,11 +37,12 @@ export default function App() {
     const tagsArray = productFormData.tags
       ? productFormData.tags.split(",").map((tag) => tag.trim())
       : [];
+
     const newProduct = {
       ...productFormData,
-      id: blogsList[blogsList.length - 1].id + 1,
       tags: tagsArray,
     };
+
     axios.post("http://localhost:3001/posts", newProduct).then((res) => {
       setBlogsList([...blogsList, res.data]);
       setProductFormData({ titolo: "", contenuto: "", tags: "", immagine: "" });
