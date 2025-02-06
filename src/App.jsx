@@ -54,7 +54,7 @@ export default function App() {
   return (
     <>
       <div className="container">
-        <h1>Lista blogs</h1>
+        <h1 className="title-principale">Lista blogs</h1>
 
         <div className="button"></div>
         <div className="row">
